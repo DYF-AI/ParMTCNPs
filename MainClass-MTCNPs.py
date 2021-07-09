@@ -650,7 +650,7 @@ class Universe:
 
 
             pop = toolbox.population(n=50)       # 可设置更合适的值，以提高速度
-            CXPB, MUTPB, NGEN = 0.5, 0.2, 1000
+            CXPB, MUTPB, NGEN = 0.5, 0.2, 500    # 1000
 
             # Evaluate the entire population
             # fitnesses = map(toolbox.evaluate, pop)

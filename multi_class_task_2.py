@@ -9,7 +9,7 @@ import os
 
 class TrainNet:
     CON_LAYERS = 256  # 节点数
-    TRAIN_STEP = 2000
+    TRAIN_STEP = 500  # 2000
 
     def __init__(self, save_dir, dimension):  ## task = 2 or 3
         self.save_dir = save_dir
