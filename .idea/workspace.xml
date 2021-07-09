@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="95e338ba-3353-4c3c-8bec-83cbee83b3c0" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1aEpeio6SsrOigTn36dJcibzcSi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ParCNPs" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\个人文件\Code_Lib\For_Many_objs_20200426" />
+      <recent name="D:\Code_Lib\TensorFlow_jupyter\TensorFlow\MTGP_CNP\For_Many_objs_20200416" />
+      <recent name="F:\个人文件\Code_Lib\For_Many_objs" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\个人文件\Code_Lib\For_Many_objs_20200426\data_test_20200423\M8_10" />
+      <recent name="D:\Code_Lib\TensorFlow_jupyter\TensorFlow\MTGP_CNP\For_Many_objs_20200416\data_test_20200423\DTLZ2\PBI\2" />
+      <recent name="D:\Code_Lib\TensorFlow_jupyter\TensorFlow\MTGP_CNP\For_Many_objs_20200416\data_test_20200423\DTLZ2\PBI\1" />
+      <recent name="D:\Code_Lib\TensorFlow_jupyter\TensorFlow\MTGP_CNP\For_Many_objs_20200416\data_test_20200423\DTLZ2" />
+      <recent name="D:\Code_Lib\TensorFlow_jupyter\TensorFlow\MTGP_CNP\For_Many_objs_20200416\data_W5D60\DTLZ5\PBI\1" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.MainClass-MTCNPs">
+    <configuration name="MainClass (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="For_Many_objs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MainClass.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="MainClass-M5" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="For_Many_objs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MainClass-M5.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="MainClass-MTCNPs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="For_Many_objs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MainClass-MTCNPs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SearchSpace" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="For_Many_objs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SearchSpace.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="show_WV" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="For_Many_objs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/show_WV.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.MainClass-MTCNPs" />
+        <item itemvalue="Python.show_WV" />
+        <item itemvalue="Python.MainClass-M5" />
+        <item itemvalue="Python.SearchSpace" />
+        <item itemvalue="Python.MainClass (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="95e338ba-3353-4c3c-8bec-83cbee83b3c0" name="Default Changelist" comment="" />
+      <created>1586310704379</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586310704379</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="666" y="184" key="#Other_File_Types" timestamp="1587979940710">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="666" y="184" key="#Other_File_Types/0.0.2560.1050@0.0.2560.1050" timestamp="1587979940710" />
+    <state x="1008" y="180" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586310821895">
+      <screen x="0" y="0" width="2560" height="1046" />
+    </state>
+    <state x="1008" y="180" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1046@0.0.2560.1046" timestamp="1586310821895" />
+    <state x="864" y="370" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1592893755989">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="864" y="370" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1050@0.0.2560.1050" timestamp="1592893755989" />
+    <state x="854" y="280" key="FileChooserDialogImpl" timestamp="1593406429151">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="854" y="279" key="FileChooserDialogImpl/0.0.2560.1046@0.0.2560.1046" timestamp="1588661563349" />
+    <state x="854" y="280" key="FileChooserDialogImpl/0.0.2560.1050@0.0.2560.1050" timestamp="1593406429151" />
+    <state width="1957" height="244" key="GridCell.Tab.0.bottom" timestamp="1593359056810">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1461" height="244" key="GridCell.Tab.0.bottom/0.0.2560.1046@0.0.2560.1046" timestamp="1590058830413" />
+    <state width="1957" height="244" key="GridCell.Tab.0.bottom/0.0.2560.1050@0.0.2560.1050" timestamp="1593359056810" />
+    <state width="1957" height="244" key="GridCell.Tab.0.center" timestamp="1593359056810">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1461" height="244" key="GridCell.Tab.0.center/0.0.2560.1046@0.0.2560.1046" timestamp="1590058830413" />
+    <state width="1957" height="244" key="GridCell.Tab.0.center/0.0.2560.1050@0.0.2560.1050" timestamp="1593359056810" />
+    <state width="1957" height="244" key="GridCell.Tab.0.left" timestamp="1593359056810">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1461" height="244" key="GridCell.Tab.0.left/0.0.2560.1046@0.0.2560.1046" timestamp="1590058830412" />
+    <state width="1957" height="244" key="GridCell.Tab.0.left/0.0.2560.1050@0.0.2560.1050" timestamp="1593359056810" />
+    <state width="1957" height="244" key="GridCell.Tab.0.right" timestamp="1593359056810">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state width="1461" height="244" key="GridCell.Tab.0.right/0.0.2560.1046@0.0.2560.1046" timestamp="1590058830413" />
+    <state width="1957" height="244" key="GridCell.Tab.0.right/0.0.2560.1050@0.0.2560.1050" timestamp="1593359056810" />
+    <state width="2538" height="290" key="GridCell.Tab.1.bottom" timestamp="1588096329449">
+      <screen x="0" y="0" width="2560" height="1046" />
+    </state>
+    <state width="2538" height="290" key="GridCell.Tab.1.bottom/0.0.2560.1046@0.0.2560.1046" timestamp="1588096329449" />
+    <state width="2538" height="136" key="GridCell.Tab.1.bottom/0.0.2560.1050@0.0.2560.1050" timestamp="1588004321811" />
+    <state width="2538" height="290" key="GridCell.Tab.1.center" timestamp="1588096329449">
+      <screen x="0" y="0" width="2560" height="1046" />
+    </state>
+    <state width="2538" height="290" key="GridCell.Tab.1.center/0.0.2560.1046@0.0.2560.1046" timestamp="1588096329449" />
+    <state width="2538" height="136" key="GridCell.Tab.1.center/0.0.2560.1050@0.0.2560.1050" timestamp="1588004321811" />
+    <state width="2538" height="290" key="GridCell.Tab.1.left" timestamp="1588096329449">
+      <screen x="0" y="0" width="2560" height="1046" />
+    </state>
+    <state width="2538" height="290" key="GridCell.Tab.1.left/0.0.2560.1046@0.0.2560.1046" timestamp="1588096329449" />
+    <state width="2538" height="136" key="GridCell.Tab.1.left/0.0.2560.1050@0.0.2560.1050" timestamp="1588004321811" />
+    <state width="2538" height="290" key="GridCell.Tab.1.right" timestamp="1588096329449">
+      <screen x="0" y="0" width="2560" height="1046" />
+    </state>
+    <state width="2538" height="290" key="GridCell.Tab.1.right/0.0.2560.1046@0.0.2560.1046" timestamp="1588096329449" />
+    <state width="2538" height="136" key="GridCell.Tab.1.right/0.0.2560.1050@0.0.2560.1050" timestamp="1588004321811" />
+    <state x="230" y="198" key="SettingsEditor" timestamp="1593333229212">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="1055" y="167" key="SettingsEditor/0.0.2560.1046@0.0.2560.1046" timestamp="1586310846703" />
+    <state x="230" y="198" key="SettingsEditor/0.0.2560.1050@0.0.2560.1050" timestamp="1593333229212" />
+    <state x="738" y="29" width="1731" height="1027" key="dock-window-1" timestamp="1593406431463">
+      <screen x="0" y="0" width="2560" height="1050" />
+    </state>
+    <state x="1356" y="114" width="1211" height="736" key="dock-window-1/0.0.2560.1046@0.0.2560.1046" timestamp="1588640524474" />
+    <state x="738" y="29" width="1731" height="1027" key="dock-window-1/0.0.2560.1050@0.0.2560.1050" timestamp="1593406431463" />
+    <state x="1441" y="255" width="672" height="678" key="search.everywhere.popup" timestamp="1586335744468">
+      <screen x="0" y="0" width="2560" height="1046" />
+    </state>
+    <state x="1441" y="255" width="672" height="678" key="search.everywhere.popup/0.0.2560.1046@0.0.2560.1046" timestamp="1586335744468" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TaskGroup.py</url>
+          <line>56</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/MainClass.py</url>
+          <line>144</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/MainClass.py</url>
+          <line>178</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/MainClass.py</url>
+          <line>157</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SearchSpace.py</url>
+          <line>899</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SearchSpace.py</url>
+          <line>353</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
