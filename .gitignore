@@ -1,0 +1,7 @@
+
+# model
+
+*.h5
+./cnp_model/model/*
+./cnp_model/model/*.meta
+*.txt
