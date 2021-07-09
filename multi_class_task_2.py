@@ -837,6 +837,18 @@ class PredictNet:
         self.param_dict['fc_225b'] = self.b_fc225
         self.param_dict['fc_226w'] = self.w_fc226
         self.param_dict['fc_226b'] = self.b_fc226
+
+                
+        # add relu
+        self.param_dict['fc_11w_relu'] = self.w_fc11_relu
+        self.param_dict['fc_11b_relu'] = self.b_fc11_relu
+        self.param_dict['fc_12w_relu'] = self.w_fc12_relu
+        self.param_dict['fc_12b_relu'] = self.b_fc12_relu
+
+        self.param_dict['fc_21w_relu'] = self.w_fc21_relu
+        self.param_dict['fc_21b_relu'] = self.b_fc21_relu
+        self.param_dict['fc_22w_relu'] = self.w_fc22_relu
+        self.param_dict['fc_22b_relu'] = self.b_fc22_relu
         
          # 最后连接层
         self.param_dict['fc_11w'] = self.w_fc11
