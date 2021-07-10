@@ -182,8 +182,7 @@ class Universe:
         # 20190602 记录f1、f2出问题
         for i in range(len(self.total_point_x)):
             f_value = self.searchSpace.black_function(self.total_point_x[i])
-            #self.output_f.write(str(f_value[0]) + ' ' + str(f_value[1]) + '\n')
-            #self.output_x.write(str(self.total_point_x[i]) + '\n')
+
             if len(f_value) == 2:
                 self.output_f.write(str(f_value[0]) + ' ' + str(f_value[1]) + '\n')
                 self.output_x.write(str(self.total_point_x[i]) + '\n')
@@ -204,8 +203,7 @@ class Universe:
         # 归一化
         self.total_point_y_one = []
         total_point_norm_function_value, ideal_point = normalize(total_point_function_value, return_zstar=True)  # return_z:返回参考点
-        #print('z', z)
-        #input()
+
         print('no norm:', total_point_function_value)
         print('norm:',total_point_norm_function_value)
         ###################################### 可忽略 ###################################################################
@@ -450,18 +448,14 @@ class Universe:
             predict_x = np.zeros([1, 1, self.fSearchSpaceDim])
             for j, value in enumerate(param):
                 predict_x[0, 0, j] = value
-            # print('observe_point_3d_one.shape:',observe_point_3d_one.shape)
-            # print('observe_point_3d_two.shape:',observe_point_3d_two.shape)
+
             if self.flag == 2:
                 mean, sigma_one = self.train_train.cnp_predict_model_1(observe_point_3d_one, observe_point_3d_two,
                                                                        predict_x)  ## 得到预测值mean和标准差sigma_one
-                # mean, sigma_one = self.train_train.cnp_predict_model_1(observe_point_3d_one, observe_point_3d_one, predict_x)  ## 20190510 预测：同观测到、输入
-                # print('mean:',mean)
-                # print('sigma:', sigma)
+
             elif self.flag == 3:
                 mean, sigma_one = self.train_train.cnp_predict_model_1(observe_point_3d_one, observe_point_3d_two,
                                                                        observe_point_3d_three, predict_x)
-                # mean, sigma_one = self.train_train.cnp_predict_model_1(observe_point_3d_one, observe_point_3d_one,observe_point_3d_one, predict_x)
 
             # print('ymin:',np.min(self.total_point_y_3d_one,axis=1))
             ymin = np.min(self.total_point_y_3d_one, axis=1)
@@ -1080,16 +1074,10 @@ class Universe:
                 self.searchSpace.fWeightVectors = self.newVector_two
                 target_function_value = self.searchSpace.black_function(best_ind)
                 target = self.searchSpace.techebycheff(target_function_value)
-                # target_function_value = self.searchSpace.black_function(best_ind)
-                # target_norm_function_value = normalize(target_function_value)
-                # target = self.searchSpace.techebycheff(target_norm_function_value)
-                # self.total_point_x_3d_two = insert_3d_array(self.total_point_x_3d, np.array(best_ind))  ## 将解添加到解码器
+
                 self.total_point_x_3d = insert_3d_array(self.total_point_x_3d, np.array(best_ind))  ## 将解添加到解码器
                 self.total_point_x.append(best_ind)
-                ##self.total_point_y_3d_two = insert_3d_array(self.total_point_y_3d_two, np.array(self.searchSpace.black_function(best_ind)))## 这里可以写f1、f2
-                # 其实y也是要更新的  self.total_point_y_3在这里其实没什么必要，确实是没必要，因为y会随着权重改变二改变
-                # self.output_f.write(str(self.searchSpace.f[0]) + ' ' + str(self.searchSpace.f[1]) + '\n')
-                # self.output_x.write(str(best_ind)+ '\n')
+    
                 if self.fNoObjectives == 2:
                     self.output_f.write(str(self.searchSpace.f[0]) + ' ' + str(self.searchSpace.f[1]) + '\n')
                     self.output_x.write(str(best_ind) + '\n')
@@ -1120,15 +1108,10 @@ class Universe:
                 # target = self.searchSpace.black_function(best_ind)
                 target_function_value = self.searchSpace.black_function(best_ind)
                 target = self.searchSpace.techebycheff(target_function_value)
-                #target_norm_function_value = normalize(target_function_value)
-                #target = self.searchSpace.techebycheff(target_norm_function_value)
-                # self.total_point_x_3d_three = insert_3d_array(self.total_point_x_3d, np.array(best_ind))  ## 将解添加到解码器
+
                 self.total_point_x_3d = insert_3d_array(self.total_point_x_3d, np.array(best_ind))  ## 将解添加到解码器
                 self.total_point_x.append(best_ind)
-                ##self.total_point_y_3d_three = insert_3d_array(self.total_point_y_3d_three, np.array(self.searchSpace.black_function(best_ind)))## 这里可以写f1、f2
-                # 其实y也是要更新的  self.total_point_y_3在这里其实没什么必要，确实是没必要，因为y会随着权重改变二改变
-                ##self.output_f.write(str(self.searchSpace.f[0]) + ' ' + str(self.searchSpace.f[1]) + '\n')
-                ##self.output_x.write(str(best_ind)+ '\n')
+         
                 if self.fNoObjectives == 2:
                     self.output_f.write(str(self.searchSpace.f[0]) + ' ' + str(self.searchSpace.f[1]) + '\n')
                     self.output_x.write(str(best_ind) + '\n')
