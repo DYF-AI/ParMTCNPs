@@ -453,7 +453,6 @@ class Universe:
             # print('observe_point_3d_one.shape:',observe_point_3d_one.shape)
             # print('observe_point_3d_two.shape:',observe_point_3d_two.shape)
             if self.flag == 2:
-
                 mean, sigma_one = self.train_train.cnp_predict_model_1(observe_point_3d_one, observe_point_3d_two,
                                                                        predict_x)  ## 得到预测值mean和标准差sigma_one
                 # mean, sigma_one = self.train_train.cnp_predict_model_1(observe_point_3d_one, observe_point_3d_one, predict_x)  ## 20190510 预测：同观测到、输入
@@ -650,7 +649,7 @@ class Universe:
 
 
             pop = toolbox.population(n=50)       # 可设置更合适的值，以提高速度
-            CXPB, MUTPB, NGEN = 0.5, 0.2, 500    # 1000
+            CXPB, MUTPB, NGEN = 0.5, 0.2, 1000    # 1000
 
             # Evaluate the entire population
             # fitnesses = map(toolbox.evaluate, pop)
