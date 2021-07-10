@@ -328,7 +328,7 @@ class TrainNet:
                 if i == 0:
                     continue
                 ##print("error:第{}次 {}".format(i + 1, loss_value / (3 * TrainNet.TRAIN_STEP)))
-                print("error:第{}次 {}".format(i + 1, loss_value))
+                print("loss:第{}次 {}".format(i + 1, loss_value))
                 # loss_value_history.append(loss_value)
                 loss_value = 0
             # 如果前后loss变化少于阈值，停止训练

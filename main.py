@@ -445,7 +445,8 @@ class Universe:
             predict_x = np.zeros([1, 1, self.fSearchSpaceDim])
             for j, value in enumerate(param):
                 predict_x[0, 0, j] = value
-
+            print("param:", param)
+            print("predict_x:", predict_x)
             if self.flag == 2:
                 mean, sigma_one = self.train_train.cnp_predict_model_1(observe_point_3d_one, observe_point_3d_two,
                                                                        predict_x)  ## 得到预测值mean和标准差sigma_one
@@ -523,12 +524,10 @@ class Universe:
             if self.flag == 2:
                 mean, sigma_one = self.train_train.cnp_predict_model_1(observe_point_3d_one, observe_point_3d_two,
                                                                        predict_x)  ## 得到预测值mean和标准差sigma_one
-                # mean, sigma_one = self.train_train.cnp_predict_model_1(observe_point_3d_one, observe_point_3d_one, predict_x)
 
             elif self.flag == 3:
                 mean, sigma_one = self.train_train.cnp_predict_model_1(observe_point_3d_one, observe_point_3d_two,
                                                                        observe_point_3d_three, predict_x)
-                # mean, sigma_one = self.train_train.cnp_predict_model_1(observe_point_3d_one, observe_point_3d_one,observe_point_3d_one, predict_x)
 
             # print('ymin:',np.min(self.total_point_y_3d_three,axis=1))
             ymin = np.min(self.total_point_y_3d_three, axis=1)
@@ -576,59 +575,71 @@ class Universe:
         print('computer {}'.format(str(self.func)))
         # 将low和up处理后，后续可以合并代码
         for task in range(1, self.flag + 1):
-            if self.func == 'ZDT1' or self.func == 'ZDT2' or self.func == 'ZDT3' or self.func == 'ZDT4' or self.func == 'ZDT6':
-                toolbox.register("mate", tools.cxSimulatedBinaryBounded, eta=20, low=low, up=up)
-                toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1,indpb=0.1)  # mutate : 变异                                                                   #tools.mutPolynomialBounded 多项式变异
-                # toolbox.register("mutate", tools.mutPolynomialBounded, eta=20, low=[0,0,0,0,0,0,0,0],up=[1,1,1,1,1,1,1,1], indpb=1.0/len(low))
-                toolbox.register("select", tools.selTournament, tournsize=3)  # select : 选择保留的最佳个体
-                if task == 1:
-                    toolbox.register("evaluate_one", evaluate_one)
-                elif task == 2:
-                    toolbox.register("evaluate_two", evaluate_two)
-                elif task == 3:
-                    toolbox.register("evaluate_three", evaluate_three)
+            toolbox.register("mate", tools.cxSimulatedBinaryBounded, eta=20, low=low, up=up)
+            toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1,indpb=0.1)  # mutate : 变异                                                                   #tools.mutPolynomialBounded 多项式变异
+            # toolbox.register("mutate", tools.mutPolynomialBounded, eta=20, low=[0,0,0,0,0,0,0,0],up=[1,1,1,1,1,1,1,1], indpb=1.0/len(low))
+            toolbox.register("select", tools.selTournament, tournsize=3)  # select : 选择保留的最佳个体
+            if task == 1:
+                toolbox.register("evaluate_one", evaluate_one)
+            elif task == 2:
+                toolbox.register("evaluate_two", evaluate_two)
+            elif task == 3:
+                toolbox.register("evaluate_three", evaluate_three)
 
-            elif self.func == 'UF1' or self.func == 'UF2' or self.func == 'UF3' or self.func == 'UF4'or \
-                    self.func == 'UF5' or self.func == 'UF6' or self.func == 'UF7' or self.func == 'UF8'\
-                    or self.func == 'UF9' or self.func == 'UF10':
-                toolbox.register("mate", tools.cxSimulatedBinaryBounded, eta=20, low=low, up=up)
-                toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1,indpb=0.1)  # mutate : 变异                                                                   #tools.mutPolynomialBounded 多项式变异
-                # toolbox.register("mutate", tools.mutPolynomialBounded, eta=20, low=[0,0,0,0,0,0,0,0],up=[1,1,1,1,1,1,1,1], indpb=1.0/len(low))
-                toolbox.register("select", tools.selTournament, tournsize=3)  # select : 选择保留的最佳个体
-                if task == 1:
-                    toolbox.register("evaluate_one", evaluate_one)
-                elif task == 2:
-                    toolbox.register("evaluate_two", evaluate_two)
-                elif task == 3:
-                    toolbox.register("evaluate_three", evaluate_three)
+        # for task in range(1, self.flag + 1):
+        #     if self.func == 'ZDT1' or self.func == 'ZDT2' or self.func == 'ZDT3' or self.func == 'ZDT4' or self.func == 'ZDT6':
+        #         toolbox.register("mate", tools.cxSimulatedBinaryBounded, eta=20, low=low, up=up)
+        #         toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1,indpb=0.1)  # mutate : 变异                                                                   #tools.mutPolynomialBounded 多项式变异
+        #         # toolbox.register("mutate", tools.mutPolynomialBounded, eta=20, low=[0,0,0,0,0,0,0,0],up=[1,1,1,1,1,1,1,1], indpb=1.0/len(low))
+        #         toolbox.register("select", tools.selTournament, tournsize=3)  # select : 选择保留的最佳个体
+        #         if task == 1:
+        #             toolbox.register("evaluate_one", evaluate_one)
+        #         elif task == 2:
+        #             toolbox.register("evaluate_two", evaluate_two)
+        #         elif task == 3:
+        #             toolbox.register("evaluate_three", evaluate_three)
 
-            elif self.func == 'F1' or self.func == 'F2' or self.func == 'F3' or self.func == 'F4' or self.func == 'F5' \
-                    or self.func == 'F6' or self.func == 'F7' or self.func == 'F8':
-                toolbox.register("mate", tools.cxSimulatedBinaryBounded, eta=20, low=low, up=up)
-                toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1,indpb=0.1)  # mutate : 变异                                                                   #tools.mutPolynomialBounded 多项式变异
-                # toolbox.register("mutate", tools.mutPolynomialBounded, eta=20, low=[0,0,0,0,0,0,0,0],up=[1,1,1,1,1,1,1,1], indpb=1.0/len(low))
-                toolbox.register("select", tools.selTournament, tournsize=3)  # select : 选择保留的最佳个体
-                if task == 1:
-                    toolbox.register("evaluate_one", evaluate_one)
-                elif task == 2:
-                    toolbox.register("evaluate_two", evaluate_two)
-                elif task == 3:
-                    toolbox.register("evaluate_three", evaluate_three)
+        #     elif self.func == 'UF1' or self.func == 'UF2' or self.func == 'UF3' or self.func == 'UF4'or \
+        #             self.func == 'UF5' or self.func == 'UF6' or self.func == 'UF7' or self.func == 'UF8'\
+        #             or self.func == 'UF9' or self.func == 'UF10':
+        #         toolbox.register("mate", tools.cxSimulatedBinaryBounded, eta=20, low=low, up=up)
+        #         toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1,indpb=0.1)  # mutate : 变异                                                                   #tools.mutPolynomialBounded 多项式变异
+        #         # toolbox.register("mutate", tools.mutPolynomialBounded, eta=20, low=[0,0,0,0,0,0,0,0],up=[1,1,1,1,1,1,1,1], indpb=1.0/len(low))
+        #         toolbox.register("select", tools.selTournament, tournsize=3)  # select : 选择保留的最佳个体
+        #         if task == 1:
+        #             toolbox.register("evaluate_one", evaluate_one)
+        #         elif task == 2:
+        #             toolbox.register("evaluate_two", evaluate_two)
+        #         elif task == 3:
+        #             toolbox.register("evaluate_three", evaluate_three)
 
-            elif self.func == 'DTLZ1' or self.func == 'DTLZ2' or self.func == 'DTLZ3' or self.func == 'DTLZ4' \
-                    or self.func == 'DTLZ5' or self.func == 'DTLZ6' or self.func == 'DTLZ7':
-                toolbox.register("mate", tools.cxSimulatedBinaryBounded, eta=20, low=low, up=up)
-                toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1, indpb=0.1)  # mutate : 变异                                                                   #tools.mutPolynomialBounded 多项式变异
-                # toolbox.register("mutate", tools.mutPolynomialBounded, eta=20, low=[0,0,0,0,0,0,0,0],up=[1,1,1,1,1,1,1,1], indpb=1.0/len(low))
-                toolbox.register("select", tools.selTournament, tournsize=3)  # select : 选择保留的最佳个体
-                if task == 1:
-                    toolbox.register("evaluate_one", evaluate_one)
-                elif task == 2:
-                    toolbox.register("evaluate_two", evaluate_two)
-                elif task == 3:
-                    toolbox.register("evaluate_three", evaluate_three)
-            else:
-                print('Please input correct function！')
+        #     elif self.func == 'F1' or self.func == 'F2' or self.func == 'F3' or self.func == 'F4' or self.func == 'F5' \
+        #             or self.func == 'F6' or self.func == 'F7' or self.func == 'F8':
+        #         toolbox.register("mate", tools.cxSimulatedBinaryBounded, eta=20, low=low, up=up)
+        #         toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1,indpb=0.1)  # mutate : 变异                                                                   #tools.mutPolynomialBounded 多项式变异
+        #         # toolbox.register("mutate", tools.mutPolynomialBounded, eta=20, low=[0,0,0,0,0,0,0,0],up=[1,1,1,1,1,1,1,1], indpb=1.0/len(low))
+        #         toolbox.register("select", tools.selTournament, tournsize=3)  # select : 选择保留的最佳个体
+        #         if task == 1:
+        #             toolbox.register("evaluate_one", evaluate_one)
+        #         elif task == 2:
+        #             toolbox.register("evaluate_two", evaluate_two)
+        #         elif task == 3:
+        #             toolbox.register("evaluate_three", evaluate_three)
+
+        #     elif self.func == 'DTLZ1' or self.func == 'DTLZ2' or self.func == 'DTLZ3' or self.func == 'DTLZ4' \
+        #             or self.func == 'DTLZ5' or self.func == 'DTLZ6' or self.func == 'DTLZ7':
+        #         toolbox.register("mate", tools.cxSimulatedBinaryBounded, eta=20, low=low, up=up)
+        #         toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1, indpb=0.1)  # mutate : 变异                                                                   #tools.mutPolynomialBounded 多项式变异
+        #         # toolbox.register("mutate", tools.mutPolynomialBounded, eta=20, low=[0,0,0,0,0,0,0,0],up=[1,1,1,1,1,1,1,1], indpb=1.0/len(low))
+        #         toolbox.register("select", tools.selTournament, tournsize=3)  # select : 选择保留的最佳个体
+        #         if task == 1:
+        #             toolbox.register("evaluate_one", evaluate_one)
+        #         elif task == 2:
+        #             toolbox.register("evaluate_two", evaluate_two)
+        #         elif task == 3:
+        #             toolbox.register("evaluate_three", evaluate_three)
+        #     else:
+        #         print('Please input correct function！')
 
 
             pop = toolbox.population(n=50)       # 可设置更合适的值，以提高速度
@@ -1139,7 +1150,7 @@ if __name__ == '__main__':
 
     for TT in range(1):
         #              func, fNoObjectives, fSearchSpaceDim, bounds, H, flag, TT=2, max_evalution=200
-        U = Universe('F1',                                               # func
+        U = Universe('F2',                                               # func
                      2,                                                  # fNoObjectives
                      8,                                                  # fSearchSpaceDim
                      [[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1]],  # bounds
