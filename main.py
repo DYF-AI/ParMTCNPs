@@ -20,7 +20,6 @@ from deap import tools
 
 # 主类Universe
 class Universe:
-
     def __init__(self, func, fNoObjectives, fSearchSpaceDim, bounds, H, flag, TT=2, DV= 'PBI', max_evalution=200):   # func:函数名  flag：任务数  TT：多次运算计数
         self.TT = TT
         self.func = func
@@ -74,8 +73,6 @@ class Universe:
         #self.TG = TaskGroup(2, 'W5D_60.csv')
         #self.TG = TaskGroup(2, 'wv_test_M5.csv')
         #self.TG = TaskGroup(2, 'wv_test_M8_wv72.csv')
-
-
 
         self.k = 9
         # 注意算法的评估次数和迭代次数是不一样的
