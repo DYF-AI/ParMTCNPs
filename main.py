@@ -2,6 +2,7 @@
 # Author： DYF
 # Data: 20190608
 import random
+import time
 import numpy as np
 import scipy.io as sv
 from pyswarm import pso
@@ -445,8 +446,8 @@ class Universe:
             predict_x = np.zeros([1, 1, self.fSearchSpaceDim])
             for j, value in enumerate(param):
                 predict_x[0, 0, j] = value
-            print("param:", param)
-            print("predict_x:", predict_x)
+            # print("param:", param)
+            # print("predict_x:", predict_x)
             if self.flag == 2:
                 mean, sigma_one = self.train_train.cnp_predict_model_1(observe_point_3d_one, observe_point_3d_two,
                                                                        predict_x)  ## 得到预测值mean和标准差sigma_one
@@ -574,11 +575,14 @@ class Universe:
 
         print('computer {}'.format(str(self.func)))
         # 将low和up处理后，后续可以合并代码
+
         for task in range(1, self.flag + 1):
+            t = time.time()
             toolbox.register("mate", tools.cxSimulatedBinaryBounded, eta=20, low=low, up=up)
             toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=1,indpb=0.1)  # mutate : 变异                                                                   #tools.mutPolynomialBounded 多项式变异
             # toolbox.register("mutate", tools.mutPolynomialBounded, eta=20, low=[0,0,0,0,0,0,0,0],up=[1,1,1,1,1,1,1,1], indpb=1.0/len(low))
             toolbox.register("select", tools.selTournament, tournsize=3)  # select : 选择保留的最佳个体
+            print("time register:", time.time()-t)
             if task == 1:
                 toolbox.register("evaluate_one", evaluate_one)
             elif task == 2:
@@ -659,6 +663,8 @@ class Universe:
                 ind.fitness.values = fit
 
             for g in range(NGEN):
+                if g % 100 == 0:
+                    print("-- Generation %i --" % g)
                 offspring = toolbox.select(pop, len(pop))
                 # Clone the selected individuals
                 offspring = list(map(toolbox.clone, offspring))
@@ -679,7 +685,6 @@ class Universe:
                                     child2[i] = random.uniform(0, 0.3)
                                 elif child2[i] > 1:
                                     child2[i] = random.uniform(0.5, 0.999)
-                            # print('child2',child2)
                             del child1.fitness.values
                             del child2.fitness.values
                     for mutant in offspring:
@@ -911,17 +916,26 @@ class Universe:
                     for child1, child2 in zip(offspring[::2], offspring[1::2]):
                         if random.random() < CXPB:
                             toolbox.mate(child1, child2)
+                            # for i in range(len(child1)):
+                            #     if child1[i] < 0:
+                            #         child1[i] = random.uniform(0, 0.3)
+                            #     elif child1[i] > 1:
+                            #         child1[i] = random.uniform(0.5, 0.999)
+                            # for i in range(len(child2)):
+                            #     if child2[i] < 0:
+                            #         child2[i] = random.uniform(0, 0.3)
+                            #     elif child2[i] > 1:
+                            #         child2[i] = random.uniform(0.5, 0.999)
+                            # 合并for
                             for i in range(len(child1)):
                                 if child1[i] < 0:
                                     child1[i] = random.uniform(0, 0.3)
                                 elif child1[i] > 1:
                                     child1[i] = random.uniform(0.5, 0.999)
-                            for i in range(len(child2)):
                                 if child2[i] < 0:
                                     child2[i] = random.uniform(0, 0.3)
                                 elif child2[i] > 1:
                                     child2[i] = random.uniform(0.5, 0.999)
-                            # print('child2',child2)
                             del child1.fitness.values
                             del child2.fitness.values
                     for mutant in offspring:
@@ -1019,6 +1033,9 @@ class Universe:
                     ind.fitness.values = fit
                 # The population is entirely replaced by the offspring
                 pop[:] = offspring
+
+                if g % 100 == 0:
+                    print("tools.selBest(pop, 1)[0]", tools.selBest(pop, 1)[0])
 
             print("-- End of (successful) evolution --")
             best_ind = tools.selBest(pop, 1)[0]  ###  这个就是下一个需要探索的x  ,best_ind是列表
@@ -1150,7 +1167,7 @@ if __name__ == '__main__':
 
     for TT in range(1):
         #              func, fNoObjectives, fSearchSpaceDim, bounds, H, flag, TT=2, max_evalution=200
-        U = Universe('F2',                                               # func
+        U = Universe('F1',                                               # func
                      2,                                                  # fNoObjectives
                      8,                                                  # fSearchSpaceDim
                      [[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1]],  # bounds
