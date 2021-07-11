@@ -3,6 +3,7 @@
 # Data: 20190608
 import random
 import time
+import tqdm
 import numpy as np
 import scipy.io as sv
 from pyswarm import pso
@@ -662,7 +663,7 @@ class Universe:
             for ind, fit in zip(pop, fitnesses):
                 ind.fitness.values = fit
 
-            for g in range(NGEN):
+            for g in tqdm(range(NGEN)):
                 if g % 100 == 0:
                     print("-- Generation %i --" % g)
                 offspring = toolbox.select(pop, len(pop))
