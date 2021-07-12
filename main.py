@@ -3,7 +3,6 @@
 # Data: 20190608
 import random
 import time
-import tqdm
 import numpy as np
 import scipy.io as sv
 from pyswarm import pso
@@ -349,7 +348,7 @@ class Universe:
         ## building MTCNP model 先创建网络(cpde_num:编码器输入个数， decode_num:解码器输入个数)
         self.first_train.set_param(code_num=self.code_num, decode_num=self.total_point_x_3d.shape[1])  ### 根据输入点数，搭建网络
         # 训练网络
-        for j in range(10):
+        for j in range(15):
             ##从总的点随机抽取0.75 作为参考点，并计算对应的y值，再打包在一起，产生一个适合输入的三维矩阵
             def update_observe_point(total_point_x_3d):  # 都是局部变量
                 # 抽取3/4   20190416选取参考点，是排序找出前0.75个，还是随机找出0.75个
@@ -663,7 +662,7 @@ class Universe:
             for ind, fit in zip(pop, fitnesses):
                 ind.fitness.values = fit
 
-            for g in tqdm(range(NGEN)):
+            for g in range(NGEN):
                 if g % 100 == 0:
                     print("-- Generation %i --" % g)
                 offspring = toolbox.select(pop, len(pop))
@@ -1168,7 +1167,7 @@ if __name__ == '__main__':
 
     for TT in range(1):
         #              func, fNoObjectives, fSearchSpaceDim, bounds, H, flag, TT=2, max_evalution=200
-        U = Universe('F1',                                               # func
+        U = Universe('F3',                                               # func
                      2,                                                  # fNoObjectives
                      8,                                                  # fSearchSpaceDim
                      [[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1]],  # bounds

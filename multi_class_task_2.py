@@ -8,7 +8,7 @@ import os
 ## 两个任务
 
 add_layer = True
-using_activate_func = False#True
+using_activate_func = True
 
 if using_activate_func:
     assert add_layer
@@ -172,8 +172,10 @@ class TrainNet:
             self.b_fc12_relu = tf.Variable(tf.constant(0.1, shape=[1]))
 
             if using_activate_func:
-                self.m_one_relu = tf.nn.relu(tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu)
-                self.m_two_relu = tf.nn.relu(tf.matmul(self.m_multi, self.w_fc12_relu) + self.b_fc12_relu)
+                # self.m_one_relu = tf.nn.relu(tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu)
+                # self.m_two_relu = tf.nn.relu(tf.matmul(self.m_multi, self.w_fc12_relu) + self.b_fc12_relu)
+                self.m_one_relu = tf.nn.sigmoid(tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu)
+                self.m_two_relu = tf.nn.sigmoid(tf.matmul(self.m_multi, self.w_fc12_relu) + self.b_fc12_relu)
             else:
                 self.m_one_relu = tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu
                 self.m_two_relu = tf.matmul(self.m_multi, self.w_fc12_relu) + self.b_fc12_relu
@@ -187,8 +189,10 @@ class TrainNet:
             self.b_fc22_relu = tf.Variable(tf.constant(0.1, shape=[1]))
 
             if using_activate_func:
-                self.log_v_one_relu = tf.nn.relu(tf.matmul(self.log_v_multi, self.w_fc21_relu) + self.b_fc21_relu)
-                self.log_v_two_relu = tf.nn.relu(tf.matmul(self.log_v_multi, self.w_fc22_relu) + self.b_fc22_relu)
+                # self.log_v_one_relu = tf.nn.relu(tf.matmul(self.log_v_multi, self.w_fc21_relu) + self.b_fc21_relu)
+                # self.log_v_two_relu = tf.nn.relu(tf.matmul(self.log_v_multi, self.w_fc22_relu) + self.b_fc22_relu)
+                self.log_v_one_relu = tf.nn.sigmoid(tf.matmul(self.log_v_multi, self.w_fc21_relu) + self.b_fc21_relu)
+                self.log_v_two_relu = tf.nn.sigmoid(tf.matmul(self.log_v_multi, self.w_fc22_relu) + self.b_fc22_relu)
             else:
                 self.log_v_one_relu = tf.matmul(self.log_v_multi, self.w_fc21_relu) + self.b_fc21_relu
                 self.log_v_two_relu = tf.matmul(self.log_v_multi, self.w_fc22_relu) + self.b_fc22_relu
@@ -346,7 +350,7 @@ class TrainNet:
                 if i == 0:
                     continue
                 ##print("error:第{}次 {}".format(i + 1, loss_value / (3 * TrainNet.TRAIN_STEP)))
-                print("error:第{}次 {}".format(i + 1, loss_value))
+                print("loss No {}: {}".format(i + 1, loss_value))
                 # loss_value_history.append(loss_value)
                 loss_value = 0
             # 如果前后loss变化少于阈值，停止训练
@@ -515,8 +519,10 @@ class PredictNet:
 
             # 使用激活函数
             if using_activate_func:
-                self.m_one_relu = tf.nn.relu(tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu)
-                self.m_two_relu = tf.nn.relu(tf.matmul(self.m_multi, self.w_fc12_relu) + self.b_fc12_relu)
+                # self.m_one_relu = tf.nn.relu(tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu)
+                # self.m_two_relu = tf.nn.relu(tf.matmul(self.m_multi, self.w_fc12_relu) + self.b_fc12_relu)
+                self.m_one_relu = tf.nn.sigmoid(tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu)
+                self.m_two_relu = tf.nn.sigmoid(tf.matmul(self.m_multi, self.w_fc12_relu) + self.b_fc12_relu)
             else:
                 self.m_one_relu = tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu
                 self.m_two_relu = tf.matmul(self.m_multi, self.w_fc12_relu) + self.b_fc12_relu
@@ -529,8 +535,10 @@ class PredictNet:
             self.b_fc22_relu = tf.Variable(tf.constant(0.1, shape=[1]))
 
             if using_activate_func:
-                self.log_v_one_relu = tf.nn.relu(tf.matmul(self.log_v_multi, self.w_fc21_relu) + self.b_fc21_relu)
-                self.log_v_two_relu = tf.nn.relu(tf.matmul(self.log_v_multi, self.w_fc22_relu) + self.b_fc22_relu)
+                # self.log_v_one_relu = tf.nn.relu(tf.matmul(self.log_v_multi, self.w_fc21_relu) + self.b_fc21_relu)
+                # self.log_v_two_relu = tf.nn.relu(tf.matmul(self.log_v_multi, self.w_fc22_relu) + self.b_fc22_relu)
+                self.log_v_one_relu = tf.nn.sigmoid(tf.matmul(self.log_v_multi, self.w_fc21_relu) + self.b_fc21_relu)
+                self.log_v_two_relu = tf.nn.sigmoid(tf.matmul(self.log_v_multi, self.w_fc22_relu) + self.b_fc22_relu)
             else:
                 self.log_v_one_relu = tf.matmul(self.log_v_multi, self.w_fc21_relu) + self.b_fc21_relu
                 self.log_v_two_relu = tf.matmul(self.log_v_multi, self.w_fc22_relu) + self.b_fc22_relu
