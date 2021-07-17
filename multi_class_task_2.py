@@ -7,8 +7,8 @@ import os
 ## 20190505 开始进行ParEGO_MTCNP
 ## 两个任务
 
-add_layer = True
-using_activate_func = True
+add_layer = False#True
+using_activate_func = False#True
 
 if using_activate_func:
     assert add_layer
@@ -166,10 +166,15 @@ class TrainNet:
             self.m_multi = tf.reshape(tf.concat([self.m_one, self.m_two], axis=-1), [-1, 2])  ## 
             self.log_v_multi = tf.reshape(tf.concat([self.log_v_one, self.log_v_two], axis=-1), [-1, 2])
 
-            self.w_fc11_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
+            # self.w_fc11_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
+            # self.b_fc11_relu = tf.Variable(tf.constant(0.1, shape=[1]))
+            # self.w_fc12_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
+            # self.b_fc12_relu = tf.Variable(tf.constant(0.1, shape=[1]))            
+            self.w_fc11_relu = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
             self.b_fc11_relu = tf.Variable(tf.constant(0.1, shape=[1]))
-            self.w_fc12_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
+            self.w_fc12_relu = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
             self.b_fc12_relu = tf.Variable(tf.constant(0.1, shape=[1]))
+
 
             if using_activate_func:
                 # self.m_one_relu = tf.nn.relu(tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu)
@@ -183,9 +188,13 @@ class TrainNet:
             self.m_two_relu = tf.reshape(self.m_two_relu, [-1, self.pointsDecodeTrainNums, 1])
 
             # add relu
-            self.w_fc21_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
+            # self.w_fc21_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
+            # self.b_fc21_relu = tf.Variable(tf.constant(0.1, shape=[1]))
+            # self.w_fc22_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
+            # self.b_fc22_relu = tf.Variable(tf.constant(0.1, shape=[1]))
+            self.w_fc21_relu = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
             self.b_fc21_relu = tf.Variable(tf.constant(0.1, shape=[1]))
-            self.w_fc22_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
+            self.w_fc22_relu = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
             self.b_fc22_relu = tf.Variable(tf.constant(0.1, shape=[1]))
 
             if using_activate_func:
@@ -203,9 +212,13 @@ class TrainNet:
             self.m_multi_relu = tf.reshape(tf.concat([self.m_one_relu, self.m_two_relu], axis=-1), [-1, 2])  ## 
             self.log_v_multi_relu = tf.reshape(tf.concat([self.log_v_one_relu, self.log_v_two_relu], axis=-1), [-1, 2])
 
-            self.w_fc11 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
+            # self.w_fc11 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
+            # self.b_fc11 = tf.Variable(tf.constant(0.1, shape=[1]))
+            # self.w_fc12 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
+            # self.b_fc12 = tf.Variable(tf.constant(0.1, shape=[1]))
+            self.w_fc11 = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
             self.b_fc11 = tf.Variable(tf.constant(0.1, shape=[1]))
-            self.w_fc12 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
+            self.w_fc12 = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
             self.b_fc12 = tf.Variable(tf.constant(0.1, shape=[1]))
 
             self.m_one = tf.matmul(self.m_multi_relu, self.w_fc11) + self.b_fc11
@@ -231,6 +244,10 @@ class TrainNet:
             self.b_fc11 = tf.Variable(tf.constant(0.1, shape=[1]))
             self.w_fc12 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
             self.b_fc12 = tf.Variable(tf.constant(0.1, shape=[1]))
+            # self.w_fc11 = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
+            # self.b_fc11 = tf.Variable(tf.constant(0.1, shape=[1]))
+            # self.w_fc12 = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
+            # self.b_fc12 = tf.Variable(tf.constant(0.1, shape=[1]))
 
             self.m_one = tf.matmul(self.m_multi, self.w_fc11) + self.b_fc11
             self.m_one = tf.reshape(self.m_one, [-1, self.pointsDecodeTrainNums, 1])
@@ -242,6 +259,10 @@ class TrainNet:
             self.b_fc21 = tf.Variable(tf.constant(0.1, shape=[1]))
             self.w_fc22 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
             self.b_fc22 = tf.Variable(tf.constant(0.1, shape=[1]))
+            # self.w_fc21 = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
+            # self.b_fc21 = tf.Variable(tf.constant(0.1, shape=[1]))
+            # self.w_fc22 = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
+            # self.b_fc22 = tf.Variable(tf.constant(0.1, shape=[1]))
 
             self.log_v_one = tf.matmul(self.log_v_multi, self.w_fc21) + self.b_fc21
             self.log_v_one = tf.reshape(self.log_v_one, [-1, self.pointsDecodeTrainNums, 1])
