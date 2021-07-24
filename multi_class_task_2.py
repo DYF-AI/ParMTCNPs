@@ -7,11 +7,13 @@ import os
 ## 20190505 开始进行ParEGO_MTCNP
 ## 两个任务
 
-add_layer = False#True
-using_activate_func = False#True
+add_layer = True
+using_activate_func = False #True
 
 if using_activate_func:
     assert add_layer
+
+add_task_layer = False#True
 
 class TrainNet:
     CON_LAYERS = 256  # 节点数
@@ -170,7 +172,7 @@ class TrainNet:
             # self.b_fc11_relu = tf.Variable(tf.constant(0.1, shape=[1]))
             # self.w_fc12_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
             # self.b_fc12_relu = tf.Variable(tf.constant(0.1, shape=[1]))            
-            self.w_fc11_relu = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
+            self.w_fc11_relu = tf.Variable(tf.truncated_normal([2 , 1], mean=0.5, stddev=0.5))
             self.b_fc11_relu = tf.Variable(tf.constant(0.1, shape=[1]))
             self.w_fc12_relu = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
             self.b_fc12_relu = tf.Variable(tf.constant(0.1, shape=[1]))
@@ -269,17 +271,50 @@ class TrainNet:
             self.log_v_two = tf.matmul(self.log_v_multi, self.w_fc22) + self.b_fc22
             self.log_v_two = tf.reshape(self.log_v_two, [-1, self.pointsDecodeTrainNums, 1])
 
+        if add_task_layer:
+            # ------------------------------------------------------------------
+            # 在每个输出在后面添加一层
+            self.w_fc11_ = tf.Variable(tf.truncated_normal([1, 1], stddev=0.1))
+            self.b_fc11_ = tf.Variable(tf.constant(0.001, shape=[1]))
+            self.w_fc12_ = tf.Variable(tf.truncated_normal([1, 1], stddev=0.1))
+            self.b_fc12_ = tf.Variable(tf.constant(0.001, shape=[1]))
+            self.m_one_ = tf.matmul(self.m_one, self.w_fc11_) + self.b_fc11_
+            self.m_one_ = tf.reshape(self.m_one_, [-1, self.pointsDecodeTrainNums, 1])
+            self.m_two_ = tf.matmul(self.m_two, self.w_fc12_) + self.b_fc12
+            self.m_two_ = tf.reshape(self.m_two_, [-1, self.pointsDecodeTrainNums, 1])
+
+            self.w_fc21_ = tf.Variable(tf.truncated_normal([1, 1], stddev=0.1))
+            self.b_fc21_ = tf.Variable(tf.constant(0.001, shape=[1]))
+            self.w_fc22_ = tf.Variable(tf.truncated_normal([1, 1], stddev=0.1))
+            self.b_fc22_ = tf.Variable(tf.constant(0.001, shape=[1]))
+            self.log_v_one_ = tf.matmul(self.log_v_one, self.w_fc21_) + self.b_fc21_
+            self.log_v_one_ = tf.reshape(self.log_v_one_, [-1, self.pointsDecodeTrainNums, 1])
+            self.log_v_two_ = tf.matmul(self.log_v_two, self.w_fc22_) + self.b_fc22_
+            self.log_v_two_ = tf.reshape(self.log_v_two_, [-1, self.pointsDecodeTrainNums, 1])
+            # -------------------------------------------------------------
 
         # 损失函数
-        self.sigma_one = 0.1 + 0.9 * tf.nn.softplus(self.log_v_one)
-        self.dist_one = tf.contrib.distributions.MultivariateNormalDiag(loc=self.m_one, scale_diag=self.sigma_one)
-        self.log_p_one = self.dist_one.log_prob(self.y_one)
-        self.loss_one = -tf.reduce_mean(self.log_p_one)
-        
-        self.sigma_two = 0.1 + 0.9 * tf.nn.softplus(self.log_v_two)
-        self.dist_two = tf.contrib.distributions.MultivariateNormalDiag(loc=self.m_two, scale_diag=self.sigma_two)
-        self.log_p_two = self.dist_two.log_prob(self.y_two)
-        self.loss_two = -tf.reduce_mean(self.log_p_two)
+        if add_task_layer:
+            self.sigma_one = 0.1 + 0.9 * tf.nn.softplus(self.log_v_one_)
+            self.dist_one = tf.contrib.distributions.MultivariateNormalDiag(loc=self.m_one_, scale_diag=self.sigma_one)
+            self.log_p_one = self.dist_one.log_prob(self.y_one)
+            self.loss_one = -tf.reduce_mean(self.log_p_one)
+            
+            self.sigma_two = 0.1 + 0.9 * tf.nn.softplus(self.log_v_two_)
+            self.dist_two = tf.contrib.distributions.MultivariateNormalDiag(loc=self.m_two_, scale_diag=self.sigma_two)
+            self.log_p_two = self.dist_two.log_prob(self.y_two)
+            self.loss_two = -tf.reduce_mean(self.log_p_two)
+        else:
+            self.sigma_one = 0.1 + 0.9 * tf.nn.softplus(self.log_v_one)
+            self.dist_one = tf.contrib.distributions.MultivariateNormalDiag(loc=self.m_one, scale_diag=self.sigma_one)
+            self.log_p_one = self.dist_one.log_prob(self.y_one)
+            self.loss_one = -tf.reduce_mean(self.log_p_one)
+            
+            self.sigma_two = 0.1 + 0.9 * tf.nn.softplus(self.log_v_two)
+            self.dist_two = tf.contrib.distributions.MultivariateNormalDiag(loc=self.m_two, scale_diag=self.sigma_two)
+            self.log_p_two = self.dist_two.log_prob(self.y_two)
+            self.loss_two = -tf.reduce_mean(self.log_p_two)
+
 
         self.loss = self.loss_one + self.loss_two 
 
@@ -342,7 +377,6 @@ class TrainNet:
             self.param_dict['fc_22w_relu'] = self.w_fc22_relu
             self.param_dict['fc_22b_relu'] = self.b_fc22_relu
 
-
         # 最后连接层
         self.param_dict['fc_11w'] = self.w_fc11
         self.param_dict['fc_11b'] = self.b_fc11
@@ -353,6 +387,18 @@ class TrainNet:
         self.param_dict['fc_21b'] = self.b_fc21
         self.param_dict['fc_22w'] = self.w_fc22
         self.param_dict['fc_22b'] = self.b_fc22
+
+        if add_task_layer:
+            self.param_dict['fc_11w_'] = self.w_fc11_
+            self.param_dict['fc_11b_'] = self.b_fc11_
+            self.param_dict['fc_12w_'] = self.w_fc12_
+            self.param_dict['fc_12b_'] = self.b_fc12_
+
+            self.param_dict['fc_21w_'] = self.w_fc21_
+            self.param_dict['fc_21b_'] = self.b_fc21_
+            self.param_dict['fc_22w_'] = self.w_fc22_
+            self.param_dict['fc_22b_'] = self.b_fc22_
+
         saver = tf.train.Saver(self.param_dict)
         
         # loss_value_history = []
@@ -619,15 +665,43 @@ class PredictNet:
             self.log_v_two = tf.matmul(self.log_v_multi, self.w_fc22) + self.b_fc22
             self.log_v_two = tf.reshape(self.log_v_two, [-1, 1, 1])
 
+        if add_task_layer:
+            # ------------------------------------------------------------------
+            # 在每个输出在后面添加一层
+            self.w_fc11_ = tf.Variable(tf.truncated_normal([1, 1], stddev=0.1))
+            self.b_fc11_ = tf.Variable(tf.constant(0.001, shape=[1]))
+            self.w_fc12_ = tf.Variable(tf.truncated_normal([1, 1], stddev=0.1))
+            self.b_fc12_ = tf.Variable(tf.constant(0.001, shape=[1]))
+            self.m_one_ = tf.matmul(self.m_one, self.w_fc11_) + self.b_fc11_
+            self.m_one_ = tf.reshape(self.m_one_, [-1, self.pointsDecodeTrainNums, 1])
+            self.m_two_ = tf.matmul(self.m_two, self.w_fc12_) + self.b_fc12
+            self.m_two_ = tf.reshape(self.m_two_, [-1, self.pointsDecodeTrainNums, 1])
 
+            self.w_fc21_ = tf.Variable(tf.truncated_normal([1, 1], stddev=0.1))
+            self.b_fc21_ = tf.Variable(tf.constant(0.001, shape=[1]))
+            self.w_fc22_ = tf.Variable(tf.truncated_normal([1, 1], stddev=0.1))
+            self.b_fc22_ = tf.Variable(tf.constant(0.001, shape=[1]))
+            self.log_v_one_ = tf.matmul(self.log_v_one, self.w_fc21_) + self.b_fc21_
+            self.log_v_one_ = tf.reshape(self.log_v_one_, [-1, self.pointsDecodeTrainNums, 1])
+            self.log_v_two_ = tf.matmul(self.log_v_two, self.w_fc22_) + self.b_fc22_
+            self.log_v_two_ = tf.reshape(self.log_v_two_, [-1, self.pointsDecodeTrainNums, 1])
+            # -------------------------------------------------------------
 
         # 预测值
-        self.sigma_one = 0.1 + 0.9 * tf.nn.softplus(self.log_v_one)
-        self.sigma_two = 0.1 + 0.9 * tf.nn.softplus(self.log_v_two)
-        self.pre_mean_one = tf.reshape(self.m_one, [1, 1])
-        self.pre_sigma_one = tf.reshape(self.sigma_one, [1, 1])
-        self.pre_mean_two = tf.reshape(self.m_two, [1, 1])
-        self.pre_sigma_two = tf.reshape(self.sigma_two, [1, 1])
+        if add_task_layer:
+            self.sigma_one = 0.1 + 0.9 * tf.nn.softplus(self.log_v_one_)
+            self.sigma_two = 0.1 + 0.9 * tf.nn.softplus(self.log_v_two_)
+            self.pre_mean_one = tf.reshape(self.m_one_, [1, 1])
+            self.pre_sigma_one = tf.reshape(self.sigma_one, [1, 1])
+            self.pre_mean_two = tf.reshape(self.m_two_, [1, 1])
+            self.pre_sigma_two = tf.reshape(self.sigma_two, [1, 1])
+        else:
+            self.sigma_one = 0.1 + 0.9 * tf.nn.softplus(self.log_v_one)
+            self.sigma_two = 0.1 + 0.9 * tf.nn.softplus(self.log_v_two)
+            self.pre_mean_one = tf.reshape(self.m_one, [1, 1])
+            self.pre_sigma_one = tf.reshape(self.sigma_one, [1, 1])
+            self.pre_mean_two = tf.reshape(self.m_two, [1, 1])
+            self.pre_sigma_two = tf.reshape(self.sigma_two, [1, 1])
 
         self.sess = tf.InteractiveSession()
         tf.global_variables_initializer().run()
@@ -695,6 +769,19 @@ class PredictNet:
         self.param_dict['fc_22b'] = self.b_fc22
         #self.param_dict['fc_23w'] = self.w_fc23
         #self.param_dict['fc_23b'] = self.b_fc23
+
+        if add_task_layer:
+            self.param_dict['fc_11w_'] = self.w_fc11_
+            self.param_dict['fc_11b_'] = self.b_fc11_
+            self.param_dict['fc_12w_'] = self.w_fc12_
+            self.param_dict['fc_12b_'] = self.b_fc12_
+
+            self.param_dict['fc_21w_'] = self.w_fc21_
+            self.param_dict['fc_21b_'] = self.b_fc21_
+            self.param_dict['fc_22w_'] = self.w_fc22_
+            self.param_dict['fc_22b_'] = self.b_fc22_
+
+
         # 读取参数
         ss = tf.train.Saver(self.param_dict)
         ss.restore(self.sess, './cnp_model/{}/cnp_model'.format(self.load_dir))

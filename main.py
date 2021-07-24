@@ -1168,7 +1168,7 @@ if __name__ == '__main__':
 
     for TT in range(1):
         #              func, fNoObjectives, fSearchSpaceDim, bounds, H, flag, TT=2, max_evalution=200
-        U = Universe('F1',                                               # func
+        U = Universe('F2',                                               # func
                      2,                                                  # fNoObjectives
                      8,                                                  # fSearchSpaceDim
                      [[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1]],  # bounds
