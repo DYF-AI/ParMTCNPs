@@ -101,7 +101,7 @@ class Universe:
         #self.output_x = open('output_MTCNP_OM_{}_x_task{}_obj{}_dim{}_{}_TT{}.csv'.format(self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')
 
         if self.flag == 2:
-            from multi_class_task_2 import TrainNet, PredictNet
+            from multi_class_task_2_new import TrainNet, PredictNet
             self.TrainNet = TrainNet
             self.PredictNet = PredictNet
         elif self.flag == 3:   # 预留三个任务的接口

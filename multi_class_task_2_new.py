@@ -7,14 +7,14 @@ import os
 ## 20190505 开始进行ParEGO_MTCNP
 ## 两个任务
 
-add_layer = False#True
+add_layer = True
 using_activate_func = False #True
 
 if using_activate_func:
     assert add_layer
 
 add_task_layer = False#True
-releate_node = 16  
+releate_node = 16
 
 class TrainNet:
     CON_LAYERS = 256  # 节点数
@@ -90,16 +90,16 @@ class TrainNet:
         self.h_fc124 = tf.nn.relu(tf.matmul(self.h_fc123, self.w_fc124) + self.b_fc124)
 
         # 解码器第五层方差
-        self.w_fc125 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, 1], stddev=0.1))
-        self.b_fc125 = tf.Variable(tf.constant(0.1, shape=[1]))
+        self.w_fc125 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, releate_node], stddev=0.1))
+        self.b_fc125 = tf.Variable(tf.constant(0.1, shape=[releate_node]))
         self.log_v_one = tf.matmul(self.h_fc124, self.w_fc125) + self.b_fc125
-        self.log_v_one = tf.reshape(self.log_v_one, [-1, self.pointsDecodeTrainNums, 1])
+        # self.log_v_one = tf.reshape(self.log_v_one, [-1, self.pointsDecodeTrainNums, 1])
 
         # 解码器第五层均值
-        self.w_fc126 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, 1], stddev=0.1))
-        self.b_fc126 = tf.Variable(tf.constant(0.1, shape=[1]))
+        self.w_fc126 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, releate_node], stddev=0.1))
+        self.b_fc126 = tf.Variable(tf.constant(0.1, shape=[releate_node]))
         self.m_one = tf.matmul(self.h_fc124, self.w_fc126) + self.b_fc126
-        self.m_one = tf.reshape(self.m_one, [-1, self.pointsDecodeTrainNums, 1])
+        # self.m_one = tf.reshape(self.m_one, [-1, self.pointsDecodeTrainNums, 1])
         
         # 任务二---------------------------------------
         self.x_two = tf.placeholder(tf.float32, [None, self.pointsCodeTrainNums, self.test_dimension+1])
@@ -153,24 +153,24 @@ class TrainNet:
         self.h_fc224 = tf.nn.relu(tf.matmul(self.h_fc223, self.w_fc224) + self.b_fc224)
 
         # 解码器第五层方差
-        self.w_fc225 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, 1], stddev=0.1))
-        self.b_fc225 = tf.Variable(tf.constant(0.1, shape=[1]))
+        self.w_fc225 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, releate_node], stddev=0.1))
+        self.b_fc225 = tf.Variable(tf.constant(0.1, shape=[releate_node]))
         self.log_v_two = tf.matmul(self.h_fc224, self.w_fc225) + self.b_fc225
-        self.log_v_two = tf.reshape(self.log_v_two, [-1, self.pointsDecodeTrainNums, 1])
+        # self.log_v_two = tf.reshape(self.log_v_two, [-1, self.pointsDecodeTrainNums, 1])
 
         # 解码器第五层均值
-        self.w_fc226 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, 1], stddev=0.1))
-        self.b_fc226 = tf.Variable(tf.constant(0.1, shape=[1]))
+        self.w_fc226 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, releate_node], stddev=0.1))
+        self.b_fc226 = tf.Variable(tf.constant(0.1, shape=[releate_node]))
         self.m_two = tf.matmul(self.h_fc224, self.w_fc226) + self.b_fc226
-        self.m_two = tf.reshape(self.m_two, [-1, self.pointsDecodeTrainNums, 1])
+        # self.m_two = tf.reshape(self.m_two, [-1, self.pointsDecodeTrainNums, 1])
         
-        self.m_multi = tf.reshape(tf.concat([self.m_one, self.m_two], axis=-1), [-1, 2])  ## 
-        self.log_v_multi = tf.reshape(tf.concat([self.log_v_one, self.log_v_two], axis=-1), [-1, 2])
+        self.m_multi = tf.reshape(tf.concat([self.m_one, self.m_two], axis=-1), [-1, 2*releate_node])  ## 
+        self.log_v_multi = tf.reshape(tf.concat([self.log_v_one, self.log_v_two], axis=-1), [-1, 2*releate_node])
         if add_layer:
             # 新的相关性 
-            self.w_fc11_relu = tf.Variable(tf.truncated_normal([2, releate_node], stddev=0.1))
+            self.w_fc11_relu = tf.Variable(tf.truncated_normal([2*releate_node, releate_node], stddev=0.1))
             self.b_fc11_relu = tf.Variable(tf.constant(0.1, shape=[releate_node]))
-            self.w_fc12_relu = tf.Variable(tf.truncated_normal([2, releate_node], stddev=0.1))
+            self.w_fc12_relu = tf.Variable(tf.truncated_normal([2*releate_node, releate_node], stddev=0.1))
             self.b_fc12_relu = tf.Variable(tf.constant(0.1, shape=[releate_node]))
 
             self.h_fc11_relu = tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu
@@ -535,16 +535,16 @@ class PredictNet:
         self.h_fc124 = tf.nn.relu(tf.matmul(self.h_fc123, self.w_fc124) + self.b_fc124)
 
         # 解码器第五层方差
-        self.w_fc125 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, 1], stddev=0.1))
-        self.b_fc125 = tf.Variable(tf.constant(0.1, shape=[1]))
+        self.w_fc125 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, releate_node], stddev=0.1))
+        self.b_fc125 = tf.Variable(tf.constant(0.1, shape=[releate_node]))
         self.log_v_one = tf.matmul(self.h_fc124, self.w_fc125) + self.b_fc125
-        self.log_v_one = tf.reshape(self.log_v_one, [-1, 1, 1])
+        # self.log_v_one = tf.reshape(self.log_v_one, [-1, 1, 1])
 
         # 解码器第五层均值
-        self.w_fc126 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, 1], stddev=0.1))
-        self.b_fc126 = tf.Variable(tf.constant(0.1, shape=[1]))
+        self.w_fc126 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, releate_node], stddev=0.1))
+        self.b_fc126 = tf.Variable(tf.constant(0.1, shape=[releate_node]))
         self.m_one = tf.matmul(self.h_fc124, self.w_fc126) + self.b_fc126
-        self.m_one = tf.reshape(self.m_one, [-1, 1, 1])
+        # self.m_one = tf.reshape(self.m_one, [-1, 1, 1])
 
         # 任务二---------------------------------------
         self.x_two = tf.placeholder(tf.float32, [None, self.pointsCodeTrainNums, self.test_dimension+1])
@@ -598,24 +598,24 @@ class PredictNet:
         self.h_fc224 = tf.nn.relu(tf.matmul(self.h_fc223, self.w_fc224) + self.b_fc224)
 
         # 解码器第五层方差
-        self.w_fc225 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, 1], stddev=0.1))
-        self.b_fc225 = tf.Variable(tf.constant(0.1, shape=[1]))
+        self.w_fc225 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, releate_node], stddev=0.1))
+        self.b_fc225 = tf.Variable(tf.constant(0.1, shape=[releate_node]))
         self.log_v_two = tf.matmul(self.h_fc224, self.w_fc225) + self.b_fc225
-        self.log_v_two = tf.reshape(self.log_v_two, [-1, 1, 1])
+        # self.log_v_two = tf.reshape(self.log_v_two, [-1, 1, 1])
 
         # 解码器第五层均值
-        self.w_fc226 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, 1], stddev=0.1))
-        self.b_fc226 = tf.Variable(tf.constant(0.1, shape=[1]))
+        self.w_fc226 = tf.Variable(tf.truncated_normal([TrainNet.CON_LAYERS, releate_node], stddev=0.1))
+        self.b_fc226 = tf.Variable(tf.constant(0.1, shape=[releate_node]))
         self.m_two = tf.matmul(self.h_fc224, self.w_fc226) + self.b_fc226
-        self.m_two = tf.reshape(self.m_two, [-1, 1, 1])
+        # self.m_two = tf.reshape(self.m_two, [-1, 1, 1])
         
-        self.m_multi = tf.reshape(tf.concat([self.m_one, self.m_two], axis=-1), [-1, 2])  ## 
-        self.log_v_multi = tf.reshape(tf.concat([self.log_v_one, self.log_v_two], axis=-1), [-1, 2])
+        self.m_multi = tf.reshape(tf.concat([self.m_one, self.m_two], axis=-1), [-1, 2*releate_node])  ## 
+        self.log_v_multi = tf.reshape(tf.concat([self.log_v_one, self.log_v_two], axis=-1), [-1, 2*releate_node])
         if add_layer:
             # 新的相关性 
-            self.w_fc11_relu = tf.Variable(tf.truncated_normal([2, releate_node], stddev=0.1))
+            self.w_fc11_relu = tf.Variable(tf.truncated_normal([2*releate_node, releate_node], stddev=0.1))
             self.b_fc11_relu = tf.Variable(tf.constant(0.1, shape=[releate_node]))
-            self.w_fc12_relu = tf.Variable(tf.truncated_normal([2, releate_node], stddev=0.1))
+            self.w_fc12_relu = tf.Variable(tf.truncated_normal([2*releate_node, releate_node], stddev=0.1))
             self.b_fc12_relu = tf.Variable(tf.constant(0.1, shape=[releate_node]))
 
             self.h_fc11_relu = tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu
