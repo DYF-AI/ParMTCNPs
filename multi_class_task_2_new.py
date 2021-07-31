@@ -194,91 +194,12 @@ class TrainNet:
             self.log_v_one = tf.reshape(self.log_v_one, [-1, self.pointsDecodeTrainNums, 1])
             self.log_v_two = tf.reshape(self.log_v_two, [-1, self.pointsDecodeTrainNums, 1])
             
-
-            # print("using relu...")
-            # # self.w_fc11_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
-            # # self.b_fc11_relu = tf.Variable(tf.constant(0.1, shape=[1]))
-            # # self.w_fc12_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
-            # # self.b_fc12_relu = tf.Variable(tf.constant(0.1, shape=[1]))            
-            # self.w_fc11_relu = tf.Variable(tf.truncated_normal([2 , 1], mean=0.5, stddev=0.5))
-            # self.b_fc11_relu = tf.Variable(tf.constant(0.1, shape=[1]))
-            # self.w_fc12_relu = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
-            # self.b_fc12_relu = tf.Variable(tf.constant(0.1, shape=[1]))
-            # print("self.w_fc11_relu:",self.w_fc11_relu)
-
-
-
-            # if using_activate_func:
-            #     # self.m_one_relu = tf.nn.relu(tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu)
-            #     # self.m_two_relu = tf.nn.relu(tf.matmul(self.m_multi, self.w_fc12_relu) + self.b_fc12_relu)
-            #     self.m_one_relu = tf.nn.sigmoid(tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu)
-            #     self.m_two_relu = tf.nn.sigmoid(tf.matmul(self.m_multi, self.w_fc12_relu) + self.b_fc12_relu)
-            # else:
-            #     self.m_one_relu = tf.matmul(self.m_multi, self.w_fc11_relu) + self.b_fc11_relu
-            #     self.m_two_relu = tf.matmul(self.m_multi, self.w_fc12_relu) + self.b_fc12_relu
-            # self.m_one_relu = tf.reshape(self.m_one_relu, [-1, self.pointsDecodeTrainNums, 1])
-            # self.m_two_relu = tf.reshape(self.m_two_relu, [-1, self.pointsDecodeTrainNums, 1])
-
-            # # add relu
-            # # self.w_fc21_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
-            # # self.b_fc21_relu = tf.Variable(tf.constant(0.1, shape=[1]))
-            # # self.w_fc22_relu = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
-            # # self.b_fc22_relu = tf.Variable(tf.constant(0.1, shape=[1]))
-            # self.w_fc21_relu = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
-            # self.b_fc21_relu = tf.Variable(tf.constant(0.1, shape=[1]))
-            # self.w_fc22_relu = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
-            # self.b_fc22_relu = tf.Variable(tf.constant(0.1, shape=[1]))
-
-            # if using_activate_func:
-            #     # self.log_v_one_relu = tf.nn.relu(tf.matmul(self.log_v_multi, self.w_fc21_relu) + self.b_fc21_relu)
-            #     # self.log_v_two_relu = tf.nn.relu(tf.matmul(self.log_v_multi, self.w_fc22_relu) + self.b_fc22_relu)
-            #     self.log_v_one_relu = tf.nn.sigmoid(tf.matmul(self.log_v_multi, self.w_fc21_relu) + self.b_fc21_relu)
-            #     self.log_v_two_relu = tf.nn.sigmoid(tf.matmul(self.log_v_multi, self.w_fc22_relu) + self.b_fc22_relu)
-            # else:
-            #     self.log_v_one_relu = tf.matmul(self.log_v_multi, self.w_fc21_relu) + self.b_fc21_relu
-            #     self.log_v_two_relu = tf.matmul(self.log_v_multi, self.w_fc22_relu) + self.b_fc22_relu
-            # self.log_v_one_relu = tf.reshape(self.log_v_one_relu, [-1, self.pointsDecodeTrainNums, 1])
-            # self.log_v_two_relu = tf.reshape(self.log_v_two_relu, [-1, self.pointsDecodeTrainNums, 1])
-
-            # # 最后一层输出
-            # self.m_multi_relu = tf.reshape(tf.concat([self.m_one_relu, self.m_two_relu], axis=-1), [-1, 2])  ## 
-            # self.log_v_multi_relu = tf.reshape(tf.concat([self.log_v_one_relu, self.log_v_two_relu], axis=-1), [-1, 2])
-
-            # # self.w_fc11 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
-            # # self.b_fc11 = tf.Variable(tf.constant(0.1, shape=[1]))
-            # # self.w_fc12 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
-            # # self.b_fc12 = tf.Variable(tf.constant(0.1, shape=[1]))
-            # self.w_fc11 = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
-            # self.b_fc11 = tf.Variable(tf.constant(0.1, shape=[1]))
-            # self.w_fc12 = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
-            # self.b_fc12 = tf.Variable(tf.constant(0.1, shape=[1]))
-
-            # self.m_one = tf.matmul(self.m_multi_relu, self.w_fc11) + self.b_fc11
-            # self.m_one = tf.reshape(self.m_one, [-1, self.pointsDecodeTrainNums, 1])
-            # self.m_two = tf.matmul(self.m_multi_relu, self.w_fc12) + self.b_fc12
-            # self.m_two = tf.reshape(self.m_two, [-1, self.pointsDecodeTrainNums, 1])
-            # print("self.m_one:", self.m_one)
-
-            # self.w_fc21 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
-            # self.b_fc21 = tf.Variable(tf.constant(0.1, shape=[1]))
-            # self.w_fc22 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
-            # self.b_fc22 = tf.Variable(tf.constant(0.1, shape=[1]))
-
-            # self.log_v_one = tf.matmul(self.log_v_multi_relu, self.w_fc21) + self.b_fc21
-            # self.log_v_one = tf.reshape(self.log_v_one, [-1, self.pointsDecodeTrainNums, 1])
-            # self.log_v_two = tf.matmul(self.log_v_multi_relu, self.w_fc22) + self.b_fc22
-            # self.log_v_two = tf.reshape(self.log_v_two, [-1, self.pointsDecodeTrainNums, 1])
-            # print("self.log_v_one:", self.log_v_one)
         else:
             # 最后一层均值输出
             self.w_fc11 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
             self.b_fc11 = tf.Variable(tf.constant(0.1, shape=[1]))
             self.w_fc12 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
             self.b_fc12 = tf.Variable(tf.constant(0.1, shape=[1]))
-            # self.w_fc11 = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
-            # self.b_fc11 = tf.Variable(tf.constant(0.1, shape=[1]))
-            # self.w_fc12 = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
-            # self.b_fc12 = tf.Variable(tf.constant(0.1, shape=[1]))
 
             self.m_one = tf.matmul(self.m_multi, self.w_fc11) + self.b_fc11
             self.m_one = tf.reshape(self.m_one, [-1, self.pointsDecodeTrainNums, 1])
@@ -290,10 +211,6 @@ class TrainNet:
             self.b_fc21 = tf.Variable(tf.constant(0.1, shape=[1]))
             self.w_fc22 = tf.Variable(tf.truncated_normal([2, 1], stddev=0.1))
             self.b_fc22 = tf.Variable(tf.constant(0.1, shape=[1]))
-            # self.w_fc21 = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
-            # self.b_fc21 = tf.Variable(tf.constant(0.1, shape=[1]))
-            # self.w_fc22 = tf.Variable(tf.truncated_normal([2, 1], mean=0.5, stddev=0.5))
-            # self.b_fc22 = tf.Variable(tf.constant(0.1, shape=[1]))
 
             self.log_v_one = tf.matmul(self.log_v_multi, self.w_fc21) + self.b_fc21
             self.log_v_one = tf.reshape(self.log_v_one, [-1, self.pointsDecodeTrainNums, 1])
@@ -410,17 +327,6 @@ class TrainNet:
             self.param_dict['fc_22b_one'] = self.b_fc22_one
             self.param_dict['fc_22w_two'] = self.w_fc22_two
             self.param_dict['fc_22b_two'] = self.b_fc22_two
-
-        # 最后连接层
-        # self.param_dict['fc_11w'] = self.w_fc11
-        # self.param_dict['fc_11b'] = self.b_fc11
-        # self.param_dict['fc_12w'] = self.w_fc12
-        # self.param_dict['fc_12b'] = self.b_fc12
-
-        # self.param_dict['fc_21w'] = self.w_fc21
-        # self.param_dict['fc_21b'] = self.b_fc21
-        # self.param_dict['fc_22w'] = self.w_fc22
-        # self.param_dict['fc_22b'] = self.b_fc22
 
         if add_task_layer:
             self.param_dict['fc_11w_'] = self.w_fc11_

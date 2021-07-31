@@ -250,8 +250,8 @@ class Universe:
             self.code_num = int((11 * self.fSearchSpaceDim - 1) * 0.75)
         else:
             self.code_num = int((self.k * self.fSearchSpaceDim - 1) * 0.75)
-        self.first_train = self.TrainNet(save_dir="{}_Model".format(self.func), dimension=self.fSearchSpaceDim)    # 保存训练模型
-        self.train_train = self.PredictNet(load_dir="{}_Model".format(self.func), dimension=self.fSearchSpaceDim)  # 加载训练模型
+        self.first_train = self.TrainNet(save_dir="{}_task_{}_Model".format(self.func, self.flag), dimension=self.fSearchSpaceDim)    # 保存训练模型
+        self.train_train = self.PredictNet(load_dir="{}_task_{}_Model".format(self.func, self.flag), dimension=self.fSearchSpaceDim)  # 加载训练模型
 
     def iterate_ParEGO(self):
         theta = 5  # NSGAIII
@@ -1174,7 +1174,7 @@ if __name__ == '__main__':
 
     for TT in range(12):
         #              func, fNoObjectives, fSearchSpaceDim, bounds, H, flag, TT=2, max_evalution=200
-        U = Universe('F2',                                               # func
+        U = Universe('F3',                                               # func
                      2,                                                  # fNoObjectives
                      8,                                                  # fSearchSpaceDim
                      [[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1]],  # bounds
