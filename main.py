@@ -94,8 +94,8 @@ class Universe:
         self.ei = 10000
 
         # 输出数据文件
-        self.output_f = open('./result/output_MTCNP_OM_{}_f_task{}_obj{}_dim{}_{}_TT{}.txt'.format(self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')
-        self.output_x = open('./result/output_MTCNP_OM_{}_x_task{}_obj{}_dim{}_{}_TT{}.txt'.format(self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')
+        self.output_f = open('./result_main/output_MTCNP_OM_{}_f_task{}_obj{}_dim{}_{}_TT{}.txt'.format(self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')
+        self.output_x = open('./result_main/output_MTCNP_OM_{}_x_task{}_obj{}_dim{}_{}_TT{}.txt'.format(self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')
 
         #self.output_f = open('output_MTCNP_OM_{}_f_task{}_obj{}_dim{}_{}_TT{}.csv'.format(self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')
         #self.output_x = open('output_MTCNP_OM_{}_x_task{}_obj{}_dim{}_{}_TT{}.csv'.format(self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')

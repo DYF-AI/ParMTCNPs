@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 # Author： DYF
 # Data: 20190608
+import os
 import random
 import time
 import numpy as np
@@ -45,8 +46,10 @@ class Universe:
         #self.weightVector.save_to_csv()  # 先把数据保存为csv格式
         #self.data = np.loadtxt('W5D_60.csv')  # 读取csv格式  # test。csv：均匀权重  wv_test1.csv:随机权重向量 # 需要在TaskGroup也修改
         if self.fNoObjectives == 5:
-            self.data = np.loadtxt('wv_test_M5.csv')
-            self.TG = TaskGroup(self.flag, 'wv_test_M5.csv')
+            # self.data = np.loadtxt('wv_test_M5.csv')
+            # self.TG = TaskGroup(self.flag, 'wv_test_M5.csv')
+            self.data = np.loadtxt('wv_test1.csv')
+            self.TG = TaskGroup(self.flag, 'wv_test1.csv')
             self.taskgroup = self.TG.creat_taskgroup()  # 三维列表
             print('taskgroup len:', len(self.taskgroup))
             print('taskgroup[0][0]:', self.taskgroup[0][0])
@@ -94,8 +97,11 @@ class Universe:
         self.ei = 10000
 
         # 输出数据文件
-        self.output_f = open('output_MTCNP_OM_{}_f_task{}_obj{}_dim{}_{}_TT{}.txt'.format(self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')
-        self.output_x = open('output_MTCNP_OM_{}_x_task{}_obj{}_dim{}_{}_TT{}.txt'.format(self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')
+        result_path = './result_new/{}'.format(self.func)
+        if not os.path.exists(result_path):
+            os.mkdir(result_path)
+        self.output_f = open('{}/output_MTCNP_OM_{}_f_task{}_obj{}_dim{}_{}_TT{}.txt'.format(result_path, self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')
+        self.output_x = open('{}/output_MTCNP_OM_{}_x_task{}_obj{}_dim{}_{}_TT{}.txt'.format(result_path, self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')
 
         #self.output_f = open('output_MTCNP_OM_{}_f_task{}_obj{}_dim{}_{}_TT{}.csv'.format(self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')
         #self.output_x = open('output_MTCNP_OM_{}_x_task{}_obj{}_dim{}_{}_TT{}.csv'.format(self.func, self.flag, self.fNoObjectives, self.fSearchSpaceDim, self.DV, self.TT), 'w')
@@ -244,8 +250,8 @@ class Universe:
             self.code_num = int((11 * self.fSearchSpaceDim - 1) * 0.75)
         else:
             self.code_num = int((self.k * self.fSearchSpaceDim - 1) * 0.75)
-        self.first_train = self.TrainNet(save_dir="Model", dimension=self.fSearchSpaceDim)    # 保存训练模型
-        self.train_train = self.PredictNet(load_dir="Model", dimension=self.fSearchSpaceDim)  # 加载训练模型
+        self.first_train = self.TrainNet(save_dir="{}_Model".format(self.func), dimension=self.fSearchSpaceDim)    # 保存训练模型
+        self.train_train = self.PredictNet(load_dir="{}_Model".format(self.func), dimension=self.fSearchSpaceDim)  # 加载训练模型
 
     def iterate_ParEGO(self):
         theta = 5  # NSGAIII
@@ -1166,17 +1172,18 @@ class Universe:
 
 if __name__ == '__main__':
 
-    for TT in range(1):
+    for TT in range(12):
         #              func, fNoObjectives, fSearchSpaceDim, bounds, H, flag, TT=2, max_evalution=200
-        U = Universe('DTLZ4',                                               # func
-                     5,                                                  # fNoObjectives
+        U = Universe('F2',                                               # func
+                     2,                                                  # fNoObjectives
                      8,                                                  # fSearchSpaceDim
                      [[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1]],  # bounds
                      #[[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1]],
                      3,                                                  # H
                      2,                                                  # flag：任务数量
                      TT,                                                 # 算法重复运行次数
-                     DV='TCH',                                           # PBI, TCH
+                     DV='TCH', #'PBI',                                           # PBI, TCH
                      max_evalution=200)                                  # 每次算法评价次数
         U.excute()
 
+# PBI  wv_test csv

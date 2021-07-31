@@ -412,15 +412,15 @@ class TrainNet:
             self.param_dict['fc_22b_two'] = self.b_fc22_two
 
         # 最后连接层
-        # self.param_dict['fc_11w'] = self.w_fc11
-        # self.param_dict['fc_11b'] = self.b_fc11
-        # self.param_dict['fc_12w'] = self.w_fc12
-        # self.param_dict['fc_12b'] = self.b_fc12
+        self.param_dict['fc_11w'] = self.w_fc11
+        self.param_dict['fc_11b'] = self.b_fc11
+        self.param_dict['fc_12w'] = self.w_fc12
+        self.param_dict['fc_12b'] = self.b_fc12
 
-        # self.param_dict['fc_21w'] = self.w_fc21
-        # self.param_dict['fc_21b'] = self.b_fc21
-        # self.param_dict['fc_22w'] = self.w_fc22
-        # self.param_dict['fc_22b'] = self.b_fc22
+        self.param_dict['fc_21w'] = self.w_fc21
+        self.param_dict['fc_21b'] = self.b_fc21
+        self.param_dict['fc_22w'] = self.w_fc22
+        self.param_dict['fc_22b'] = self.b_fc22
 
         if add_task_layer:
             self.param_dict['fc_11w_'] = self.w_fc11_
@@ -824,14 +824,14 @@ class PredictNet:
             self.param_dict['fc_22b_two'] = self.b_fc22_two
 
         #  # 最后连接层
-        # self.param_dict['fc_11w'] = self.w_fc11
-        # self.param_dict['fc_11b'] = self.b_fc11
-        # self.param_dict['fc_12w'] = self.w_fc12
-        # self.param_dict['fc_12b'] = self.b_fc12
-        # self.param_dict['fc_21w'] = self.w_fc21
-        # self.param_dict['fc_21b'] = self.b_fc21
-        # self.param_dict['fc_22w'] = self.w_fc22
-        # self.param_dict['fc_22b'] = self.b_fc22
+        self.param_dict['fc_11w'] = self.w_fc11
+        self.param_dict['fc_11b'] = self.b_fc11
+        self.param_dict['fc_12w'] = self.w_fc12
+        self.param_dict['fc_12b'] = self.b_fc12
+        self.param_dict['fc_21w'] = self.w_fc21
+        self.param_dict['fc_21b'] = self.b_fc21
+        self.param_dict['fc_22w'] = self.w_fc22
+        self.param_dict['fc_22b'] = self.b_fc22
 
         if add_task_layer:
             self.param_dict['fc_11w_'] = self.w_fc11_
