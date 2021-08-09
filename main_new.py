@@ -111,7 +111,8 @@ class Universe:
             self.TrainNet = TrainNet
             self.PredictNet = PredictNet
         elif self.flag == 3:   # 预留三个任务的接口
-            from multi_class_task_3 import TrainNet, PredictNet
+            # from multi_class_task_3 import TrainNet, PredictNet
+            from multi_class_task_3_new import TrainNet, PredictNet
             self.TrainNet = TrainNet
             self.PredictNet = PredictNet
         else:
@@ -1174,8 +1175,8 @@ if __name__ == '__main__':
 
     for TT in range(12):
         #              func, fNoObjectives, fSearchSpaceDim, bounds, H, flag, TT=2, max_evalution=200
-        U = Universe('F3',                                               # func
-                     2,                                                  # fNoObjectives
+        U = Universe('DTLZ4',                                               # func
+                     3,                                                  # fNoObjectives
                      8,                                                  # fSearchSpaceDim
                      [[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1]],  # bounds
                      #[[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1]],
@@ -1187,3 +1188,4 @@ if __name__ == '__main__':
         U.excute()
 
 # PBI  wv_test csv
+# F9 F10 [[0,1],[0,10],[0,10],...]

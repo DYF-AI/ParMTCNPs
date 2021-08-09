@@ -16,6 +16,8 @@ if using_activate_func:
 add_task_layer = False#True
 releate_node = 32  # 16->0.4085  8->0.4112
 
+# F6 -> 64
+
 class TrainNet:
     CON_LAYERS = 256  # 节点数
     TRAIN_STEP = 2000

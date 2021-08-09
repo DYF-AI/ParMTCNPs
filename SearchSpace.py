@@ -327,9 +327,7 @@ class SearchSpace:  # 输入个体x
             g = float(1 + 9.0 * (sum1 / (self.fSearchSpaceDim - 1)))
             # self.f2 = g*(1 - (self.f1/g)**(0.5))
             f2 = g * (1 - (f1 / g) ** (0.5))
-            # self.f = [self.f1, self.f2]
             self.f = [f1, f2]
-            # print('f:',self.f)   # 以上代码可以写成函数
 
 
         elif self.fun == 'ZDT2':
@@ -627,7 +625,7 @@ class SearchSpace:  # 输入个体x
             for i in range(1, self.fSearchSpaceDim):
                 sum1 = sum1 + ((xpop[i]) ** 2 - xpop[0]) ** 2
             g = 1 + 9 * (sum1 / (self.fSearchSpaceDim - 1))
-            f2 = g * (1 - (xpop[0] / g)) ** 0.5
+            f2 = g * (1 - (xpop[0] / g)**0.5)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
             self.f = [f1, f2]
 
         elif self.fun == 'F6':
@@ -666,7 +664,7 @@ class SearchSpace:  # 输入个体x
             for i in range(2, self.fSearchSpaceDim):
                 mul = mul * math.cos((xpop[i] ** 2 - xpop[0]) / (i - 1) ** 0.5)
             g = (1 / 4000) * sum1 - mul + 2
-            f2 = g(1 - (f1 / g) ** 0.5)
+            f2 = g*(1 - (f1 / g) ** 0.5)
             self.f = [f1, f2]
 
         elif self.fun == 'F10':
@@ -714,7 +712,7 @@ class SearchSpace:  # 输入个体x
             else:
                 print('!!ERROR')
 
-        elif self.fun == 'DTLZ2_T':
+        elif self.fun == 'DTLZ2':
             sum1 = 0
             for i in range(2, self.fSearchSpaceDim):
                 sum1 = sum1 + (xpop[i] - 0.5) ** 2
@@ -724,7 +722,7 @@ class SearchSpace:  # 输入个体x
             f3 = math.sin((math.pi / 2) * xpop[0]) * (1 + g)
             self.f = [f1, f2, f3]
 
-        elif self.fun == 'DTLZ2':
+        elif self.fun == 'DTLZ2_':
             k = self.fSearchSpaceDim - self.fNoObjectives + 1
             g = 0.0
             for i in range(self.fSearchSpaceDim - k, self.fSearchSpaceDim):
